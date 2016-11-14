@@ -3,4 +3,11 @@
   <PropertyGroup>
     <ReferenceCachePath>C:\Users\trainee3\AppData\Local\Temp\ionic-js-tabs2_refcache</ReferenceCachePath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">
+    <DebuggerFlavor>RippleNexusS</DebuggerFlavor>
+    <AndroidEmulatorID>AndroidDevice;Device</AndroidEmulatorID>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|iOS'">
+    <DebuggerFlavor>RippleiPhone5</DebuggerFlavor>
+  </PropertyGroup>
 </Project>

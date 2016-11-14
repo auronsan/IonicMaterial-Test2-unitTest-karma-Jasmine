@@ -1,47 +1,35 @@
-<ion-view view-title="Home">
+<ion-view view-title="Kuboseinz-Shop">
     <ion-content ng-class="{expanded:$scope.isExpanded}">
-        <div class="hero slide-up" style="background-image: url('img/shop-welcome-banner.jpg');">
-            <div class="content">  
-                <div class="tabs tabs-dark tabs-icon-top static">
-                    <a ui-sref="app.activity" class="tab-item">
-                        <i class="icon ion-bag"></i> Activity
-                    </a>
-                    <a ui-sref="app.friends" class="tab-item">
-                        <i class="icon ion-android-people"></i> Friends
-                    </a>
-                    <a ui-sref="app.gallery" class="tab-item">
-                        <i class="icon ion-images"></i> Photos
-                    </a>
-                </div>                
+               <ion-slide-box on-slide-changed="slideHasChanged($index)">
+                    <ion-slide>
+                        <div class="hero slide-up" style="background-image: url('img/shop-welcome-banner.jpg');">
+                        </div>
+                    </ion-slide>
+                    <ion-slide>
+                        <div class="hero slide-up" style="background-image: url('img/daenerys.jpg');">
+                        </div>
+                    </ion-slide>
+                    <ion-slide>
+                        <div class="hero slide-up" style="background-image: url('img/login.jpg');">
+                        </div>
+                    </ion-slide>
+                </ion-slide-box>       
+        <div class="row">   
+            <div class="col">
+                <button ui-sref="app.activity" class="button  button-block icon-left ion-search button-calm">Cari Produk</button>
+            </div>   
             </div>
-            
-        </div>
-        <div class="list animate-fade-slide-in-right" ng-controller="ProductsController">
-            <ul>
-             <li ng-repeat="product in products"> 
-                 <div class="list card red">
-                     <div class="">
-                         <img src={{product.image}}>
-                         <h2>{{ product.name}}</h2>
-                         <div class="item item-body">
-                             {{product.desc}} <p>
-                                 <a class="subdued">{{product.price}}</a>
-                             </p>
-                         </div>
-                         <div class="item tabs tabs-secondary tabs-icon-left">
-                             <a class="tab-item" data-ink-color="#336699" data-ink-opacity="0.5">
-                                 <i class="icon cart"></i> Buy
-                             </a> <a class="tab-item" data-ink-color="#336699" data-ink-opacity="0.5">
-                                 <i class="icon ion-chatbox"></i> Comment
-                             </a> <a class="tab-item" data-ink-color="#336699" data-ink-opacity="0.5">
-                                 <i class="icon ion-share"></i> Share
-                             </a>
-                         </div>
-                         </div>
-                     </div>
-</li>
-            </ul>   
-            
+        <div class="row">
+            <div class="col">
+                <button ui-sref="app.gallery" class="button  button-block icon-left ion-star button-energized">Produk Baru</button>
+            </div>
+        </div>    
+            <div class="row">
+                <div class="col">
+            <button class="button  button-block icon-left ion-star button-royal">Favourite</button>
+</div>
+</div>
+       
+</ion-content>
 
-    </ion-content>
 </ion-view>

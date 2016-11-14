@@ -1,8 +1,28 @@
 /* global angular, document, window */
 'use strict';
 angular.module('starter.controllers', [])
-    .controller('ProductsController', function($scope, $http) {
-        $http({ method: 'GET', url: 'http://172.19.14.128:3000/api/produklists' }).success(function (data) {
+    .controller('ProductsController', function ($scope, $http) {
+        $scope.options = {
+            loop: false,
+            effect: 'fade',
+            speed: 500,
+        }
+
+        $scope.$on("$ionicSlides.sliderInitialized", function (event, data) {
+            // data.slider is the instance of Swiper
+            $scope.slider = data.slider;
+        });
+
+        $scope.$on("$ionicSlides.slideChangeStart", function (event, data) {
+            console.log('Slide change is beginning');
+        });
+
+        $scope.$on("$ionicSlides.slideChangeEnd", function (event, data) {
+            // note: the indexes are 0-based
+            $scope.activeIndex = data.slider.activeIndex;
+            $scope.previousIndex = data.slider.previousIndex;
+        })
+        $http({ method: 'GET', url: 'http://kuboseinz.co/test2/' }).success(function (data) {
             console.log('hello');
             $scope.products = data;
             // response data
@@ -23,9 +43,9 @@ angular.module('starter.controllers', [])
 
     $scope.loginData = {};
     $scope.isExpanded = false;
+    $scope.footer = false;
     $scope.hasHeaderFabLeft = false;
     $scope.hasHeaderFabRight = false;
-
     var navIcons = document.getElementsByClassName('ion-navicon');
     for (var i = 0; i < navIcons.length; i++) {
         navIcons.addEventListener('click', function() {
@@ -113,6 +133,10 @@ angular.module('starter.controllers', [])
     }).
         error(function (data) {
             console.log(data);
+            var alertPopup = $ionicPopup.alert({
+                title: 'Not Connected to server!',
+                template: 'Please check your internet!'
+            });
         });
     $scope.login = function () {
         LoginService.loginUser($scope.data.username, $scope.data.password, $scope.logins.username, $scope.logins.password).success(function (data) {
@@ -129,19 +153,16 @@ angular.module('starter.controllers', [])
         $scope.$parent.hideHeader();
     }, 0);
     ionicMaterialInk.displayEffect();
-    
 })
 
 .controller('FriendsCtrl', function($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion) {
     // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
-    $scope.$parent.setHeaderFab('left');
-
+  
     // Delay expansion
     $timeout(function() {
-        $scope.isExpanded = true;
-        $scope.$parent.setExpanded(true);
+      
     }, 300);
 
     // Set Motion
@@ -155,10 +176,7 @@ angular.module('starter.controllers', [])
     // Set Header
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
-    $scope.isExpanded = false;
-    $scope.$parent.setExpanded(false);
-    $scope.$parent.setHeaderFab(false);
-
+   
     // Set Motion
     $timeout(function() {
         ionicMaterialMotion.slideUp({
@@ -174,14 +192,12 @@ angular.module('starter.controllers', [])
 
     // Set Ink
     ionicMaterialInk.displayEffect();
+
 })
 
 .controller('ActivityCtrl', function($scope, $stateParams, $timeout, ionicMaterialMotion, ionicMaterialInk) {
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
-    $scope.isExpanded = true;
-    $scope.$parent.setExpanded(true);
-    $scope.$parent.setHeaderFab('right');
 
     $timeout(function() {
         ionicMaterialMotion.fadeSlideIn({
@@ -193,12 +209,10 @@ angular.module('starter.controllers', [])
     ionicMaterialInk.displayEffect();
 })
 
-.controller('GalleryCtrl', function($scope, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion) {
+.controller('GalleryCtrl', function($scope,$http, $stateParams, $timeout, ionicMaterialInk, ionicMaterialMotion) {
     $scope.$parent.showHeader();
     $scope.$parent.clearFabs();
-    $scope.isExpanded = true;
-    $scope.$parent.setExpanded(true);
-    $scope.$parent.setHeaderFab(false);
+   
 
     // Activate ink for controller
     ionicMaterialInk.displayEffect();
@@ -209,7 +223,23 @@ angular.module('starter.controllers', [])
     ionicMaterialMotion.fadeSlideInRight({
         selector: '.animate-fade-slide-in .item'
     });
-
+    $http({ method: 'GET', url: 'http://kuboseinz.co/test2/' }).success(function (data) {
+        console.log('hello');
+        $scope.products = data;
+        // response data
+    }).
+        error(function (data) {
+            console.log(data);
+        });
+    $scope.mySplit = function (string, nb) {
+        var array = string.split('.');
+        return array[nb];
+    };
+    $scope.mySplitL = function (string) {
+        var a = $scope.mySplit(string, 0);
+        a = "http://www.kuboseinz.co/ocart2/image/cache/" + a + "-200x200.jpg";
+        return a;
+    };
 })
 
 

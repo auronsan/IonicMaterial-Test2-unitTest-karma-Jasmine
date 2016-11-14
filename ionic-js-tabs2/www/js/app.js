@@ -24,14 +24,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','i
 .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
 
     // Turn off caching for demo simplicity's sake
-    $ionicConfigProvider.views.maxCache(0);
-    
+   //$ionicConfigProvider.views.maxCache(0);
+
+
     /*
     // Turn off back button text
     $ionicConfigProvider.backButton.previousTitleText(false);
     */
 
-    $stateProvider.state('app', {
+    $stateProvider
+
+    .state('app', {
         url: '/app',
         abstract: true,
         templateUrl: 'templates/menu.html',
@@ -113,7 +116,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','i
                 controller: 'ProfileCtrl'
             },
             'fabContent': {
-                template: '<button id="fab-profile" class="button button-fab button-fab-bottom-right button-energized-900"><i class="icon ion-plus"></i></button>',
+                template: 'expanded',
                 controller: function ($timeout) {
                     /*$timeout(function () {
                         document.getElementById('fab-profile').classList.toggle('on');
